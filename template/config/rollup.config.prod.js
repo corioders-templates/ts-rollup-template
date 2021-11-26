@@ -5,7 +5,7 @@ const common = require('./rollup.config.common.js');
 
 /** @type {import('rollup').RollupOptions}*/
 const rollupConfig = {
-	...common.rollup,
+	...common.rollupConfig,
 };
 
 let outputArray = rollupConfig.output;

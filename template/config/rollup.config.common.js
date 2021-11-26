@@ -31,7 +31,7 @@ const aliases = require(path.resolve(config.CONFIG_PATH, 'alias.json'));
 for (const key in aliases) aliases[key] = path.resolve(config.ROOT_PATH, aliases[key]);
 
 /** @type {import('rollup').RollupOptions} */
-const rollup = {
+const rollupConfig = {
 	input: path.resolve(paths.src, 'index.ts'),
 	output: {
 		dir: paths.out,
@@ -55,7 +55,7 @@ const rollup = {
 };
 
 if (config.IS_WATCH) {
-	rollup.plugins.push(
+	rollupConfig.plugins.push(
 		devServerPlugin({
 			silent: true,
 			port: 8081,
@@ -66,6 +66,6 @@ if (config.IS_WATCH) {
 }
 
 module.exports = {
-	rollup,
+	rollupConfig: rollupConfig,
 	paths,
 };

@@ -7,8 +7,8 @@ const htmlPlugin = require('@rollup/plugin-html');
 
 /** @type {import('rollup').RollupOptions}*/
 const rollupConfig = {
-	...common.rollup,
-	plugins: [...common.rollup.plugins, htmlPlugin()],
+	...common.rollupConfig,
+	plugins: [...common.rollupConfig.plugins, htmlPlugin()],
 };
 
 module.exports = rollupConfig;
