@@ -1,11 +1,12 @@
 const path = require('path');
 const config = require('./config.js');
 
-
 const aliasPlugin = require('@rollup/plugin-alias');
 const replacePlugin = require('@rollup/plugin-replace');
 const deletePlugin = require('rollup-plugin-delete');
 const progressPlugin = require('rollup-plugin-progress');
+
+const devServerPlugin = require('rollup-plugin-dev');
 
 const typescriptPlugin = require('rollup-plugin-typescript2');
 
@@ -17,7 +18,6 @@ const paths = {
 	eslintConfig: path.resolve(config.ROOT_PATH, '.eslintrc.js'),
 	tsConfig: path.resolve(config.ROOT_PATH, 'tsconfig.json'),
 };
-
 
 const options = {};
 options.ts = {
@@ -53,6 +53,17 @@ const rollup = {
 		typescriptPlugin(options.ts),
 	],
 };
+
+if (config.IS_WATCH) {
+	rollup.plugins.push(
+		devServerPlugin({
+			silent: true,
+			port: 8081,
+			host: config.ENV.HOST,
+			dirs: [paths.out],
+		}),
+	);
+}
 
 module.exports = {
 	rollup,
