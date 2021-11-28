@@ -8,6 +8,9 @@ const progressPlugin = require('rollup-plugin-progress');
 
 const devServerPlugin = require('rollup-plugin-dev');
 
+const commonjsPlugin = require('@rollup/plugin-commonjs');
+const { default: nodeResolvePlugin } = require('@rollup/plugin-node-resolve');
+
 const typescriptPlugin = require('rollup-plugin-typescript2');
 
 const paths = {
@@ -50,6 +53,9 @@ const rollupConfig = {
 		progressPlugin(),
 		deletePlugin({ targets: `${paths.out}/*` }),
 
+		commonjsPlugin(),
+		nodeResolvePlugin(),
+
 		typescriptPlugin(options.ts),
 	],
 };
@@ -66,6 +72,6 @@ if (config.IS_WATCH) {
 }
 
 module.exports = {
-	rollupConfig: rollupConfig,
+	rollupConfig,
 	paths,
 };

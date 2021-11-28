@@ -3,9 +3,12 @@ if (!config.IS_PRODUCTION) console.warn('Waring: using production config not in 
 
 const common = require('./rollup.config.common.js');
 
+const { terser: terserPlugin } = require('rollup-plugin-terser');
+
 /** @type {import('rollup').RollupOptions}*/
 const rollupConfig = {
 	...common.rollupConfig,
+	plugins: [...common.rollupConfig.plugins, terserPlugin()],
 };
 
 let outputArray = rollupConfig.output;
